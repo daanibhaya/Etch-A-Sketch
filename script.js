@@ -3,6 +3,7 @@ const btnBlack = document.createElement('button')
 const btnGray = document.createElement('button')
 const btnRGB = document.createElement('button')
 const btnSize = document.createElement('button')
+const btnEraser = document.createElement('button')
 const section = document.querySelector('.selection');
 const buttonsContainer = document.querySelector('.buttons');
 
@@ -11,6 +12,7 @@ grayColor();
 blackColor();
 rgbColor();
 reSize();
+erase();
 
 window.onload = () => {
     const boxs = container.querySelectorAll('.box')
@@ -28,6 +30,18 @@ function createDivs(col, rows) {
     }
 }
 
+function erase() {
+    const boxs = container.querySelectorAll('.box')
+    btnEraser.textContent = 'Eraser'
+    btnEraser.addEventListener('click', () => {
+        boxs.forEach(box => box.addEventListener('mouseover', () => {
+            box.style.background = 'rgb(240, 255, 240)'
+        }))
+    })
+    buttonsContainer.appendChild(btnEraser).classList.add('btn')
+
+}
+
 function grayColor() {
     const boxs = container.querySelectorAll('.box')
     btnGray.textContent = 'Gray'
@@ -37,7 +51,6 @@ function grayColor() {
             box.style.background = `rgb(${Rnum},${Rnum},${Rnum})`
         }))
     })
-
     buttonsContainer.appendChild(btnGray).classList.add('btn')
 }
 
@@ -49,7 +62,6 @@ function blackColor() {
             box.style.background = 'black'
         }))
     })
-
     buttonsContainer.appendChild(btnBlack).classList.add('btn')
 }
 
@@ -64,7 +76,6 @@ function rgbColor() {
             box.style.background = `rgb(${R},${G},${B})`
         }))
     })
-
     buttonsContainer.appendChild(btnRGB).classList.add('btn')
 }
 
@@ -74,7 +85,7 @@ function reSet() {
 }
 
 function reSize() {
-    btnSize.textContent = 'Grid Size'
+    btnSize.textContent = 'Size'
     btnSize.addEventListener('click', () => {
         let user = prompt('Select a grid size! (Enter a single number between 2 and 256)')
         if(user === null || user < 1) {
